@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -22,6 +23,7 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 	int currentState;
 	Timer frameDraw;
 	boolean playIsGreen = false;
+	boolean howToPlay = false;
 	
 	AmongUsGamePanel(){
 		currentState = MENU;
@@ -53,10 +55,17 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 			g.setFont(thirdFont);
 			g.setColor(Color.white);
 			g.drawString("Press 'How To Play' For Instructions", 5, 225);
+			
+			if (howToPlay) {
+				g.setFont(thirdFont);
+				g.setColor(Color.green);
+				g.drawString("How To Play", 159, 225);
+				}
 		}
 	
 		void drawGameState(Graphics g) {
-			
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, 800, 450);
 		}
 		
 		void drawEndState(Graphics g) {
@@ -90,6 +99,12 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		else {
 			playIsGreen = false;
 		}
+		if (mouseX > 147 && mouseX < 411 && mouseY > 228 && mouseY < 253) {
+			howToPlay = true;
+		}
+		else {
+			howToPlay = false;
+		}
 	}
 
 	@Override
@@ -112,6 +127,15 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		// TODO Auto-generated method stub
 		System.out.println("X " + e.getX());
 		System.out.println("Y " + e.getY());
+		int mouseX = e.getX();
+		int mouseY = e.getY();
+		if (mouseX > 147 && mouseX < 411 && mouseY > 228 && mouseY < 253) {
+			JOptionPane.showMessageDialog(null, "drag the same colored wires together to complete the task");
+		}
+		if (mouseX >288 && mouseX < 432 && mouseY > 344 && mouseY < 383) {
+			currentState = GAME;
+		}
+		
 	}
 
 	@Override
