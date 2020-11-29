@@ -24,6 +24,7 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 	Timer frameDraw;
 	boolean playIsGreen = false;
 	boolean howToPlay = false;
+	ObjectManager manager = new ObjectManager();
 	
 	AmongUsGamePanel(){
 		currentState = MENU;
@@ -66,6 +67,7 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		void drawGameState(Graphics g) {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 450);
+			manager.draw(g);
 		}
 		
 		void drawEndState(Graphics g) {
