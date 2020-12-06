@@ -1,12 +1,15 @@
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.Line2D;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,9 +24,12 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 	final int GAME = 1;
 	final int END = 2;
 	int currentState;
+	int mouseX;
+	int mouseY;
 	Timer frameDraw;
 	boolean playIsGreen = false;
 	boolean howToPlay = false;
+	boolean wires = false;
 	ObjectManager manager = new ObjectManager();
 	
 	AmongUsGamePanel(){
@@ -68,6 +74,15 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 450);
 			manager.draw(g);
+			Graphics2D g2 = (Graphics2D) g;
+			g2.setColor(Color.RED);
+			g2.setStroke(new BasicStroke(25));
+			g2.draw(new Line2D.Float(0, 62, mouseX, mouseY));
+			
+			g2 = (Graphics2D) g;
+			g2.setColor(Color.YELLOW);
+			g2.setStroke(new BasicStroke(25));
+			g2.draw(new Line2D.Float(0, 157, mouseX, mouseY));
 		}
 		
 		void drawEndState(Graphics g) {
@@ -93,8 +108,8 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		int mouseX = e.getX();
-		int mouseY = e.getY();
+		mouseX = e.getX();
+	    mouseY = e.getY();
 		if (mouseX >288 && mouseX < 432 && mouseY > 344 && mouseY < 383) {
 			playIsGreen = true;
 		}
@@ -106,6 +121,10 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		}
 		else {
 			howToPlay = false;
+		}
+		
+		if (currentState == GAME) {
+			wires = true;
 		}
 	}
 
