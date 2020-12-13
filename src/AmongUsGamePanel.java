@@ -30,6 +30,10 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 	boolean playIsGreen = false;
 	boolean howToPlay = false;
 	boolean wires = false;
+	boolean redWire = false;
+	boolean yellowWire = false;
+	boolean blueWire = false;
+	boolean magentaWire = false;
 	ObjectManager manager = new ObjectManager();
 	
 	AmongUsGamePanel(){
@@ -75,14 +79,29 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 			g.fillRect(0, 0, 800, 450);
 			manager.draw(g);
 			Graphics2D g2 = (Graphics2D) g;
+			if(redWire) {
 			g2.setColor(Color.RED);
 			g2.setStroke(new BasicStroke(25));
 			g2.draw(new Line2D.Float(0, 62, mouseX, mouseY));
-			
+			}
+			if(yellowWire) {
 			g2 = (Graphics2D) g;
 			g2.setColor(Color.YELLOW);
 			g2.setStroke(new BasicStroke(25));
-			g2.draw(new Line2D.Float(0, 157, mouseX, mouseY));
+			g2.draw(new Line2D.Float(0, 160, mouseX, mouseY));
+			}
+			if(blueWire) {
+			g2 = (Graphics2D) g;
+			g2.setColor(Color.BLUE);
+			g2.setStroke(new BasicStroke(25));
+			g2.draw(new Line2D.Float(0, 260, mouseX, mouseY));
+			}
+			if(magentaWire) {
+			g2 = (Graphics2D) g;
+			g2.setColor(Color.MAGENTA);
+			g2.setStroke(new BasicStroke(25));
+			g2.draw(new Line2D.Float(0, 360, mouseX, mouseY));
+			}
 		}
 		
 		void drawEndState(Graphics g) {
@@ -156,7 +175,36 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		if (mouseX >288 && mouseX < 432 && mouseY > 344 && mouseY < 383) {
 			currentState = GAME;
 		}
+		redWire = false;
+		yellowWire = false;
+		blueWire = false;
+		magentaWire = false;
 		
+		
+		if (mouseX > 0 && mouseX < 25 && mouseY > 75 && mouseY <  97) {
+			redWire = true;
+		}
+		else{
+			redWire = false;
+		}
+		if (mouseX > 0 && mouseX < 25 && mouseY > 175 && mouseY <  197) {
+			yellowWire = true;
+		}
+		else{
+			yellowWire = false;
+		}
+		if (mouseX > 0 && mouseX < 25 && mouseY > 275 && mouseY <  297) {
+			blueWire = true;
+		}
+		else{
+			blueWire = false;
+		}
+		if (mouseX > 0 && mouseX < 25 && mouseY > 375 && mouseY <  397) {
+			magentaWire = true;
+		}
+		else{
+			magentaWire = false; 
+		}
 	}
 
 	@Override
