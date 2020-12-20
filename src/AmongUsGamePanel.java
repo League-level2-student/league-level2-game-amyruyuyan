@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Line2D;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,6 +36,7 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 	boolean blueWire = false;
 	boolean magentaWire = false;
 	ObjectManager manager = new ObjectManager();
+	ArrayList <Wire> wireList;
 	
 	AmongUsGamePanel(){
 		currentState = MENU;
@@ -43,7 +45,23 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		titleFont = new Font("Courier New", Font.PLAIN, 96);
 		secondFont = new Font("Courier New", Font.PLAIN, 48);
 		thirdFont = new Font("Courier New", Font.PLAIN, 36);
+		//wireConnectors = new ArrayList<WireConnector>();
+		//wireConnectors.add(new WireConnector(0, 50, 25, 25, Color.RED));
+		//wireConnectors.add(new WireConnector(0, 150, 25, 25, Color.YELLOW));
+		//wireConnectors.add(new WireConnector(0, 250, 25, 25, Color.BLUE));
+		//wireConnectors.add(new WireConnector(0, 350, 25, 25, Color.MAGENTA));
+
+		//wireConnectors.add(new WireConnector(775, 50, 25, 25, Color.RED));
+		//wireConnectors.add(new WireConnector(775, 150, 25, 25, Color.YELLOW));
+		//wireConnectors.add(new WireConnector(775, 250, 25, 25, Color.BLUE));
+		//wireConnectors.add(new WireConnector(775, 350, 25, 25, Color.MAGENTA));
+		wireList = new ArrayList<Wire>();
+		wireList.add(new Wire(0, 0, 0, 0, Color.RED, new WireConnector(0, 50, 25, 25), new WireConnector(775, 50, 25, 25)));
+		wireList.add(new Wire(0, 0, 0, 0, Color.YELLOW, new WireConnector(0, 150, 25, 25), new WireConnector(775, 150, 25, 25)));
+		wireList.add(new Wire(0, 0, 0, 0, Color.BLUE, new WireConnector(0, 250, 25, 25), new WireConnector(775, 250, 25, 25)));
+		wireList.add(new Wire(0, 0, 0, 0, Color.MAGENTA, new WireConnector(0, 350, 25, 25), new WireConnector(775, 350, 25, 25)));
 	}
+	
 	
 		void drawMenuState(Graphics g){
 			g.setColor(Color.black);
@@ -169,43 +187,49 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		System.out.println("Y " + e.getY());
 		int mouseX = e.getX();
 		int mouseY = e.getY();
-		if (mouseX > 147 && mouseX < 411 && mouseY > 228 && mouseY < 253) {
+		if (mouseX > 147 && mouseX < 411 && mouseY > 228 && mouseY < 253 && currentState == MENU) {
 			JOptionPane.showMessageDialog(null, "drag the same colored wires together to complete the task");
 		}
-		if (mouseX >288 && mouseX < 432 && mouseY > 344 && mouseY < 383) {
+		if (mouseX >288 && mouseX < 432 && mouseY > 344 && mouseY < 383 && currentState == MENU) {
 			currentState = GAME;
 		}
-		redWire = false;
-		yellowWire = false;
-		blueWire = false;
-		magentaWire = false;
+		if(currentState == GAME) {
+			for(int k = 0; k < wireList.size(); k++) {
+				
+			}
+		}
+		//redWire = false;
+		//yellowWire = false;
+//		blueWire = false;
+		//magentaWire = false;
 		
 		
-		if (mouseX > 0 && mouseX < 25 && mouseY > 75 && mouseY <  97) {
-			redWire = true;
-		}
-		else{
-			redWire = false;
-		}
-		if (mouseX > 0 && mouseX < 25 && mouseY > 175 && mouseY <  197) {
-			yellowWire = true;
-		}
-		else{
-			yellowWire = false;
-		}
-		if (mouseX > 0 && mouseX < 25 && mouseY > 275 && mouseY <  297) {
-			blueWire = true;
-		}
-		else{
-			blueWire = false;
-		}
-		if (mouseX > 0 && mouseX < 25 && mouseY > 375 && mouseY <  397) {
-			magentaWire = true;
-		}
-		else{
-			magentaWire = false; 
-		}
-	}
+//		if (mouseX > 0 && mouseX < 25 && mouseY > 75 && mouseY <  99) {
+//			redWire = true;
+//		}
+//		else{
+//			redWire = false;
+//		}
+//		if (mouseX > 0 && mouseX < 25 && mouseY > 175 && mouseY <  199) {
+//			yellowWire = true;
+//		}
+//		else{
+//			yellowWire = false;
+//		}
+//		if (mouseX > 0 && mouseX < 25 && mouseY > 275 && mouseY <  299) {
+//			blueWire = true;
+//		}
+//		else{
+//			blueWire = false;
+//		}
+//		if (mouseX > 0 && mouseX < 25 && mouseY > 375 && mouseY <  399) {
+//			magentaWire = true;
+//		}
+//		else{
+//			magentaWire = false; 
+//		}		
+//
+		
 
 	@Override
 	public void mousePressed(MouseEvent e) {
