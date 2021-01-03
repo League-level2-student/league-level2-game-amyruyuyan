@@ -36,7 +36,7 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 	boolean blueWire = false;
 	boolean magentaWire = false;
 	ObjectManager manager = new ObjectManager();
-	ArrayList <Wire> wireList;
+
 	
 	AmongUsGamePanel(){
 		currentState = MENU;
@@ -55,11 +55,7 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		//wireConnectors.add(new WireConnector(775, 150, 25, 25, Color.YELLOW));
 		//wireConnectors.add(new WireConnector(775, 250, 25, 25, Color.BLUE));
 		//wireConnectors.add(new WireConnector(775, 350, 25, 25, Color.MAGENTA));
-		wireList = new ArrayList<Wire>();
-		wireList.add(new Wire(0, 0, 0, 0, Color.RED, new WireConnector(0, 50, 25, 25), new WireConnector(775, 50, 25, 25)));
-		wireList.add(new Wire(0, 0, 0, 0, Color.YELLOW, new WireConnector(0, 150, 25, 25), new WireConnector(775, 150, 25, 25)));
-		wireList.add(new Wire(0, 0, 0, 0, Color.BLUE, new WireConnector(0, 250, 25, 25), new WireConnector(775, 250, 25, 25)));
-		wireList.add(new Wire(0, 0, 0, 0, Color.MAGENTA, new WireConnector(0, 350, 25, 25), new WireConnector(775, 350, 25, 25)));
+		
 	}
 	
 	
@@ -96,30 +92,30 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 450);
 			manager.draw(g);
-			Graphics2D g2 = (Graphics2D) g;
-			if(redWire) {
-			g2.setColor(Color.RED);
-			g2.setStroke(new BasicStroke(25));
-			g2.draw(new Line2D.Float(0, 62, mouseX, mouseY));
-			}
-			if(yellowWire) {
-			g2 = (Graphics2D) g;
-			g2.setColor(Color.YELLOW);
-			g2.setStroke(new BasicStroke(25));
-			g2.draw(new Line2D.Float(0, 160, mouseX, mouseY));
-			}
-			if(blueWire) {
-			g2 = (Graphics2D) g;
-			g2.setColor(Color.BLUE);
-			g2.setStroke(new BasicStroke(25));
-			g2.draw(new Line2D.Float(0, 260, mouseX, mouseY));
-			}
-			if(magentaWire) {
-			g2 = (Graphics2D) g;
-			g2.setColor(Color.MAGENTA);
-			g2.setStroke(new BasicStroke(25));
-			g2.draw(new Line2D.Float(0, 360, mouseX, mouseY));
-			}
+			//Graphics2D g2 = (Graphics2D) g;
+//			if(redWire) {
+//			g2.setColor(Color.RED);
+//			g2.setStroke(new BasicStroke(25));
+//			g2.draw(new Line2D.Float(0, 62, mouseX, mouseY));
+//			}
+//			if(yellowWire) {
+//			g2 = (Graphics2D) g;
+//			g2.setColor(Color.YELLOW);
+//			g2.setStroke(new BasicStroke(25));
+//			g2.draw(new Line2D.Float(0, 160, mouseX, mouseY));
+//			}
+//			if(blueWire) {
+//			g2 = (Graphics2D) g;
+//			g2.setColor(Color.BLUE);
+//			g2.setStroke(new BasicStroke(25));
+//			g2.draw(new Line2D.Float(0, 260, mouseX, mouseY));
+			//}
+			//if(magentaWire) {
+			//g2 = (Graphics2D) g;
+			//g2.setColor(Color.MAGENTA);
+			//g2.setStroke(new BasicStroke(25));
+			//g2.draw(new Line2D.Float(0, 360, mouseX, mouseY));
+			//}
 		}
 		
 		void drawEndState(Graphics g) {
@@ -161,7 +157,7 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		}
 		
 		if (currentState == GAME) {
-			wires = true;
+			manager.wireMoved(mouseX, mouseY);
 		}
 	}
 
@@ -194,10 +190,10 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 			currentState = GAME;
 		}
 		if(currentState == GAME) {
-			for(int k = 0; k < wireList.size(); k++) {
-				
+		manager.wireClicked(mouseX, mouseY);
 			}
-		}
+	}
+	
 		//redWire = false;
 		//yellowWire = false;
 //		blueWire = false;
@@ -227,8 +223,8 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 //		}
 //		else{
 //			magentaWire = false; 
-//		}		
-//
+		//}		
+
 		
 
 	@Override

@@ -5,9 +5,8 @@ public class WireConnector extends GameObject{
 
 	Color color;
 	
-	WireConnector(int x, int y, int width, int height, Color color) {
+	WireConnector(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		this.color = color;
 		
 		// TODO Auto-generated constructor stub
 	}
