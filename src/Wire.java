@@ -32,7 +32,7 @@ public class Wire extends GameObject{
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setColor(color);
 			g2.setStroke(new BasicStroke(25));
-			g2.draw(new Line2D.Float(start.x, start.y, end.x, end.y));
+			g2.draw(new Line2D.Float(start.x, start.y + 12, end.x, end.y + 12));
 		}
 		else if(isSelected) {
 			Graphics2D g2 = (Graphics2D) g;

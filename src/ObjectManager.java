@@ -34,13 +34,27 @@ ObjectManager(){
 		for (int l = 0; l < wires.size(); l++) {
 			Wire wire = wires.get(l);
 			WireConnector connector = wire.start;
-			if (connector.collisionBox.contains(mouseX, mouseY)) {
+			//WireConnector endConnecter = wire.end;
+			if(l==0 && wire.isSelected) {
+				redWireConnected(mouseX, mouseY);
+			}
+			if(l==1 && wire.isSelected) {
+				yellowWireConnected(mouseX, mouseY);
+			}
+			if(l==2 && wire.isSelected) {
+				blueWireConnected(mouseX, mouseY);
+			}
+			if(l==3 && wire.isSelected) {
+				magentaWireConnected(mouseX, mouseY);
+			}
+			else if (connector.collisionBox.contains(mouseX, mouseY)) {
 				wire.isSelected = true;
 				System.out.println(wire.isSelected);
 			}
 			else {
 				wire.isSelected = false;
 			}
+
 		}
 	}
 	
@@ -52,7 +66,28 @@ ObjectManager(){
 		}
 	}
 	
+	void redWireConnected(int mouseX, int mouseY) {
+		if (mouseX > 776 && mouseX < 800 && mouseY > 75 && mouseY < 99) {
+			wires.get(0).isConnected = true;
+		}
+	}
 	
+	void yellowWireConnected(int mouseX, int mouseY) {
+		if (mouseX > 776 && mouseX < 800 && mouseY > 175 && mouseY < 199) {
+			wires.get(1).isConnected = true;
+		}
+	}
 	
+	void blueWireConnected(int mouseX, int mouseY) {
+		if (mouseX > 776 && mouseX < 800 && mouseY > 275 && mouseY < 299) {
+			wires.get(2).isConnected = true;
+		}
+	}
+	
+	void magentaWireConnected(int mouseX, int mouseY) {
+		if (mouseX > 776 && mouseX < 800 && mouseY > 375 && mouseY < 399) {
+			wires.get(3).isConnected = true;
+		}
+	}
 	
 }
