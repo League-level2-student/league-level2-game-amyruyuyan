@@ -90,4 +90,19 @@ ObjectManager(){
 		}
 	}
 	
+	void update() {
+		if (gameOver()) {
+			AmongUsGamePanel.currentState = AmongUsGamePanel.END;
+		}
+	}
+	
+	boolean gameOver() {
+		for (int n = 0; n < wires.size(); n++) {
+			Wire wire = wires.get(n);
+			if (wire.isConnected == false) {
+				return false;
+			}
+	}
+		return true;
+	}
 }

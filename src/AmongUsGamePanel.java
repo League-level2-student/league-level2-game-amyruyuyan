@@ -21,10 +21,10 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 	Font secondFont;
 	Font thirdFont;
 	Font endFont;
-	final int MENU = 0;
-	final int GAME = 1;
-	final int END = 2;
-	int currentState;
+	static final int MENU = 0;
+	static final int GAME = 1;
+	static final int END = 2;
+	static int currentState;
 	int mouseX;
 	int mouseY;
 	Timer frameDraw;
@@ -45,6 +45,7 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		titleFont = new Font("Courier New", Font.PLAIN, 96);
 		secondFont = new Font("Courier New", Font.PLAIN, 48);
 		thirdFont = new Font("Courier New", Font.PLAIN, 36);
+		endFont = new Font("Courier New", Font.PLAIN, 48);
 		//wireConnectors = new ArrayList<WireConnector>();
 		//wireConnectors.add(new WireConnector(0, 50, 25, 25, Color.RED));
 		//wireConnectors.add(new WireConnector(0, 150, 25, 25, Color.YELLOW));
@@ -119,6 +120,11 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		}
 		
 		void drawEndState(Graphics g) {
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, AmongUsGame.WIDTH, AmongUsGame.HEIGHT);
+			g.setFont(endFont);
+			g.setColor(Color.WHITE);
+			g.drawString("Congrats you finished!", 80, 225);
 			
 		}
 		
@@ -167,6 +173,7 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		if(currentState == MENU){
 		    //updateMenuState();
 		}else if(currentState == GAME){
+			manager.update();
 		    //updateGameState();
 		}else if(currentState == END){
 		    //updateEndState();
