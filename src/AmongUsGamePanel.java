@@ -27,7 +27,9 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 	static int currentState;
 	int mouseX;
 	int mouseY;
+	int time;
 	Timer frameDraw;
+	Timer finalTime;
 	boolean playIsGreen = false;
 	boolean howToPlay = false;
 	boolean wires = false;
@@ -35,6 +37,7 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 	boolean yellowWire = false;
 	boolean blueWire = false;
 	boolean magentaWire = false;
+	boolean gameOver = false;
 	ObjectManager manager = new ObjectManager();
 
 	
@@ -46,6 +49,7 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		secondFont = new Font("Courier New", Font.PLAIN, 48);
 		thirdFont = new Font("Courier New", Font.PLAIN, 36);
 		endFont = new Font("Courier New", Font.PLAIN, 48);
+		finalTime = new Timer(1000, this);
 		//wireConnectors = new ArrayList<WireConnector>();
 		//wireConnectors.add(new WireConnector(0, 50, 25, 25, Color.RED));
 		//wireConnectors.add(new WireConnector(0, 150, 25, 25, Color.YELLOW));
@@ -87,6 +91,8 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 				g.setColor(Color.green);
 				g.drawString("How To Play", 159, 225);
 				}
+			
+		
 		}
 	
 		void drawGameState(Graphics g) {
@@ -124,7 +130,10 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 			g.fillRect(0, 0, AmongUsGame.WIDTH, AmongUsGame.HEIGHT);
 			g.setFont(endFont);
 			g.setColor(Color.WHITE);
-			g.drawString("Congrats you finished!", 80, 225);
+			g.drawString("Congrats you finished!", 80, 200);
+			g.setFont(endFont);
+			g.setColor(Color.WHITE);
+			g.drawString("Your final time was:" + time, 80, 250);
 			
 		}
 		
@@ -176,8 +185,14 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 			manager.update();
 		    //updateGameState();
 		}else if(currentState == END){
-		    //updateEndState();
-		    
+		    gameOver = true; 		    
+		}
+		if (gameOver) {
+			finalTime.stop();
+		}
+		
+		if (e.getSource( )== finalTime) {
+			time++;
 		}
 		//System.out.println("action");
 		repaint();
@@ -195,6 +210,7 @@ public class AmongUsGamePanel extends JPanel implements MouseMotionListener, Act
 		}
 		if (mouseX >288 && mouseX < 432 && mouseY > 344 && mouseY < 383 && currentState == MENU) {
 			currentState = GAME;
+			finalTime.start();
 		}
 		if(currentState == GAME) {
 		manager.wireClicked(mouseX, mouseY);
